@@ -16,7 +16,7 @@ class CategoryController extends Controller
      * @return JsonResponse
      *
      * @OA\Get(
-     *      path="admin/categories",
+     *      path="/admin/categories",
      *      operationId="getCategoriesList",
      *      tags={"Admin/Categories"},
      *      summary="Get list of categories",
@@ -51,7 +51,7 @@ class CategoryController extends Controller
      * @return JsonResponse
      *
      * @OA\Post (
-     *     path="admin/categories",
+     *     path="/admin/categories",
      *     operationId="storeCategory",
      *     tags={"Admin/Categories"},
      *     summary="Store new category",
@@ -99,7 +99,7 @@ class CategoryController extends Controller
      * @return JsonResponse
      *
      * @OA\Get(
-     *      path="admin/categories/{id}",
+     *      path="/admin/categories/{id}",
      *      operationId="getCategoryById",
      *      tags={"Admin/Categories"},
      *      summary="Get category by id",
@@ -148,7 +148,7 @@ class CategoryController extends Controller
      * @return JsonResponse
      *
      * @OA\Put(
-     *      path="admin/categories/{id}",
+     *      path="/admin/categories/{id}",
      *      operationId="updateCategory",
      *      tags={"Admin/Categories"},
      *      summary="Update existing category",
@@ -224,7 +224,7 @@ class CategoryController extends Controller
      * @throws Exception
      *
      * @OA\Delete (
-     *      path="admin/categories/{id}",
+     *      path="/admin/categories/{id}",
      *      operationId="deleteCategoryById",
      *      tags={"Admin/Categories"},
      *      summary="Delete category by id",
