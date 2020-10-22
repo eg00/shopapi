@@ -111,10 +111,10 @@ class CategoryController extends Controller
      *      @OA\Response(
      *          response=200,
      *          description="successful operation",
-     *          @OA\JsonContent()
+     *          @OA\JsonContent(ref="#/components/schemas/Category")
      *       ),
-     *      @OA\Response(response=400, description="Bad request", @OA\JsonContent()),
-     *      @OA\Response(response=404, description="Resource Not Found", @OA\JsonContent()),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
      *      security={
      *         {
      *             "oauth2_security_example": {"write:projects", "read:projects"}
@@ -138,26 +138,61 @@ class CategoryController extends Controller
      * @param  Request  $request
      * @param  Category  $category
      * @return JsonResponse
+     *
+     * @OA\Put(
+     *      path="/categories/{id}",
+     *      operationId="updateCategory",
+     *      tags={"Categories"},
+     *      summary="Update existing category",
+     *      description="Returns updated category data",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="category id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(ref="#/components/schemas/Category")
+     *      ),
+     *      @OA\Response(
+     *          response=202,
+     *          description="Successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/Category")
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad Request"
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Resource Not Found"
+     *      )
+     * )
      */
     public function update(Request $request, Category $category): JsonResponse
     {
-        if (!$category) {
-            return response()->json(
-                [
-                    'success' => false,
-                    'message' => 'Category not found'
-                ],
-                Response::HTTP_BAD_REQUEST
-            );
-        }
 
         $updated = $category->fill($request->all())->save();
 
         if ($updated) {
             return response()->json(
                 [
-                    'success' => true
-                ]
+                    'success' => true,
+                    'data' => $category
+                ],
+                Response::HTTP_ACCEPTED
             );
         }
 
