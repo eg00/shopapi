@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\CategoryController;
+use App\Http\Controllers\API\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('admin')->group(
     function () {
         Route::apiResource('categories', CategoryController::class);
+        Route::apiResource('users', UserController::class);
     }
 );
 
