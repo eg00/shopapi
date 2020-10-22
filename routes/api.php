@@ -13,8 +13,9 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::prefix('admin')->group(
+    function () {
+        Route::apiResource('categories', CategoryController::class);
+    }
+);
 
-Route::apiResource('categories', CategoryController::class);
-Route::fallback(function(){
-    return response()->json(['success' => false,'message' => 'Not Found.'], 404);
-})->name('api.fallback.404');
