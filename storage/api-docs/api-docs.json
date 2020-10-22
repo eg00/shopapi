@@ -1,0 +1,343 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Supershop Api",
+        "description": "LSupershop Api description",
+        "version": "0.1"
+    },
+    "servers": [
+        {
+            "url": "http://supershop1.test/api",
+            "description": "Base server"
+        },
+        {
+            "url": "http://supershop1.test"
+        }
+    ],
+    "paths": {
+        "admin/categories": {
+            "get": {
+                "tags": [
+                    "Admin/Categories"
+                ],
+                "summary": "Get list of categories",
+                "description": "Returns list of categories",
+                "operationId": "getCategoriesList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "description": "Display a listing of categories.",
+                                            "type": "boolean"
+                                        },
+                                        "data": {
+                                            "description": "Display a listing of categories.",
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Category"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Admin/Categories"
+                ],
+                "summary": "Store new category",
+                "description": "Return project data",
+                "operationId": "storeCategory",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Category"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "description": "Store a newly created resource in storage.",
+                                            "type": "boolean"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Category"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "admin/categories/{id}": {
+            "get": {
+                "tags": [
+                    "Admin/Categories"
+                ],
+                "summary": "Get category by id",
+                "description": "Returns category data",
+                "operationId": "getCategoryById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "category id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "description": "Display the specified resource.",
+                                            "type": "boolean"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Category"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "oauth2_security_example": [
+                            "write:projects",
+                            "read:projects"
+                        ]
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Admin/Categories"
+                ],
+                "summary": "Update existing category",
+                "description": "Returns updated category data",
+                "operationId": "updateCategory",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "category id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Category"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "description": "Update the specified resource in storage.",
+                                            "type": "boolean"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Category"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Admin/Categories"
+                ],
+                "summary": "Delete category by id",
+                "description": "Deletes a record and returns no content",
+                "operationId": "deleteCategoryById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "category id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "oauth2": [
+                            "write:categories",
+                            "read:categories"
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Category": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Model"
+                    },
+                    {
+                        "properties": {
+                            "id": {
+                                "description": "Class Category",
+                                "type": "integer",
+                                "readOnly": "true",
+                                "example": "1"
+                            },
+                            "name": {
+                                "description": "Name",
+                                "type": "string",
+                                "example": "Category name"
+                            },
+                            "short_description": {
+                                "description": "",
+                                "type": "string",
+                                "example": "",
+                                "nullable": true
+                            },
+                            "description": {
+                                "description": "",
+                                "type": "string",
+                                "example": ""
+                            },
+                            "order": {
+                                "description": "Sort order in menu",
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "parent_id": {
+                                "description": "Parent category id",
+                                "type": "integer",
+                                "default": null,
+                                "readOnly": "true",
+                                "nullable": true
+                            },
+                            "created_at": {
+                                "$ref": "#/components/schemas/Model/properties/created_at"
+                            },
+                            "updated_at": {
+                                "$ref": "#/components/schemas/Model/properties/updated_at"
+                            },
+                            "deleted_at": {
+                                "$ref": "#/components/schemas/Model/properties/deleted_at"
+                            }
+                        },
+                        "type": "object"
+                    }
+                ]
+            },
+            "Model": {
+                "required": [
+                    "created_at",
+                    "updated_at"
+                ],
+                "properties": {
+                    "created_at": {
+                        "description": "Initial creation timestamp",
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": "true"
+                    },
+                    "updated_at": {
+                        "description": "Last update timestamp",
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": "true"
+                    },
+                    "deleted_at": {
+                        "description": "Soft delete timestamp",
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": "true"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}

@@ -16,16 +16,17 @@ class CategoryController extends Controller
      * @return JsonResponse
      *
      * @OA\Get(
-     *      path="/categories",
+     *      path="admin/categories",
      *      operationId="getCategoriesList",
-     *      tags={"Categories"},
+     *      tags={"Admin/Categories"},
      *      summary="Get list of categories",
      *      description="Returns list of categories",
      *      @OA\Response(
      *          response=200,
      *          description="Successful operation",
      *          @OA\JsonContent(
-     *              @OA\Property(property="categories", type="array", @OA\Items(ref="#/components/schemas/Category")),
+     *              @OA\Property(property="success", type="boolean"),
+     *              @OA\Property(property="data", type="array", @OA\Items(ref="#/components/schemas/Category")),
      *          )
      *       )
      *     )
@@ -50,19 +51,23 @@ class CategoryController extends Controller
      * @return JsonResponse
      *
      * @OA\Post (
-     *     path="/categories",
+     *     path="admin/categories",
      *     operationId="storeCategory",
-     *     tags={"Categories"},
+     *     tags={"Admin/Categories"},
      *     summary="Store new category",
      *     description="Return project data",
      *     @OA\RequestBody(
      *          required=true,
      *          @OA\JsonContent(ref="#/components/schemas/Category")
      *     ),
-     * @OA\Response(
-     *      response=200,
-     *      description="Success",
-     * )
+     *     @OA\Response(
+     *          response=200,
+     *          description="Success",
+     *              @OA\JsonContent(
+     *                  @OA\Property(property="success", type="boolean"),
+     *                  @OA\Property(property="data", ref="#/components/schemas/Category"),
+     *              )
+     *      )
      * ),
      */
     public function store(Request $request): JsonResponse
@@ -94,9 +99,9 @@ class CategoryController extends Controller
      * @return JsonResponse
      *
      * @OA\Get(
-     *      path="/categories/{id}",
+     *      path="admin/categories/{id}",
      *      operationId="getCategoryById",
-     *      tags={"Categories"},
+     *      tags={"Admin/Categories"},
      *      summary="Get category by id",
      *      description="Returns category data",
      *      @OA\Parameter(
@@ -108,11 +113,14 @@ class CategoryController extends Controller
      *              type="integer"
      *          )
      *      ),
-     *      @OA\Response(
+     *     @OA\Response(
      *          response=200,
-     *          description="successful operation",
-     *          @OA\JsonContent(ref="#/components/schemas/Category")
-     *       ),
+     *          description="Success",
+     *              @OA\JsonContent(
+     *                  @OA\Property(property="success", type="boolean"),
+     *                  @OA\Property(property="data", ref="#/components/schemas/Category"),
+     *              )
+     *      ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
      *      security={
@@ -140,9 +148,9 @@ class CategoryController extends Controller
      * @return JsonResponse
      *
      * @OA\Put(
-     *      path="/categories/{id}",
+     *      path="admin/categories/{id}",
      *      operationId="updateCategory",
-     *      tags={"Categories"},
+     *      tags={"Admin/Categories"},
      *      summary="Update existing category",
      *      description="Returns updated category data",
      *      @OA\Parameter(
@@ -158,11 +166,14 @@ class CategoryController extends Controller
      *          required=true,
      *          @OA\JsonContent(ref="#/components/schemas/Category")
      *      ),
-     *      @OA\Response(
+     *     @OA\Response(
      *          response=202,
-     *          description="Successful operation",
-     *          @OA\JsonContent(ref="#/components/schemas/Category")
-     *       ),
+     *          description="Success",
+     *              @OA\JsonContent(
+     *                  @OA\Property(property="success", type="boolean"),
+     *                  @OA\Property(property="data", ref="#/components/schemas/Category"),
+     *              )
+     *      ),
      *      @OA\Response(
      *          response=400,
      *          description="Bad Request"
@@ -213,9 +224,9 @@ class CategoryController extends Controller
      * @throws Exception
      *
      * @OA\Delete (
-     *      path="/categories/{id}",
+     *      path="admin/categories/{id}",
      *      operationId="deleteCategoryById",
-     *      tags={"Categories"},
+     *      tags={"Admin/Categories"},
      *      summary="Delete category by id",
      *      description="Deletes a record and returns no content",
      *      @OA\Parameter(
