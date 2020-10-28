@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Requests\CategoryRequest;
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use Exception;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Http\Response;
 
@@ -49,7 +49,7 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  Request  $request
+     * @param  CategoryRequest $request
      * @return JsonResponse
      *
      * @OA\Post (
@@ -69,10 +69,18 @@ class CategoryController extends Controller
      *                  @OA\Property(property="success", type="boolean"),
      *                  @OA\Property(property="data", ref="#/components/schemas/Category"),
      *              )
+     *      ),
+     *     @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Entity",
+     *              @OA\JsonContent(
+     *                  @OA\Property(property="success", type="boolean", example="false"),
+     *                  @OA\Property(property="errors", type="object"),
+     *              )
      *      )
      * ),
      */
-    public function store(Request $request): JsonResponse
+    public function store(CategoryRequest $request): JsonResponse
     {
         $category = new Category($request->all());
 
@@ -146,7 +154,7 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  Request  $request
+     * @param  CategoryRequest  $request
      * @param  Category  $category
      * @return JsonResponse
      *
@@ -192,18 +200,26 @@ class CategoryController extends Controller
      *      @OA\Response(
      *          response=404,
      *          description="Resource Not Found"
+     *      ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Entity",
+     *              @OA\JsonContent(
+     *                  @OA\Property(property="success", type="boolean", example="false"),
+     *                  @OA\Property(property="errors", type="object"),
+     *              )
      *      )
      * )
      */
-    public function update(Request $request, Category $category): JsonResponse
+    public function update(CategoryRequest $request, Category $category): JsonResponse
     {
-        $updated = $category->fill($request->all())->save();
+        $updated = $category->fill($request->all());
 
-        if ($updated) {
+        if ($updated->save()) {
             return response()->json(
                 [
                     'success' => true,
-                    'data' => new CategoryResource($category)
+                    'data' => new CategoryResource($updated)
                 ],
                 Response::HTTP_ACCEPTED
             );
