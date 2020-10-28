@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Http\Response;
 
 class CategoryController extends Controller
@@ -13,7 +15,7 @@ class CategoryController extends Controller
     /**
      * Display a listing of categories.
      *
-     * @return JsonResponse
+     * @return ResourceCollection
      *
      * @OA\Get(
      *      path="/admin/categories",
@@ -39,7 +41,7 @@ class CategoryController extends Controller
         return response()->json(
             [
                 'success' => true,
-                'data' => $categories
+                'data' => CategoryResource::collection($categories)
             ]
         );
     }
@@ -78,8 +80,9 @@ class CategoryController extends Controller
             return response()->json(
                 [
                     'success' => true,
-                    'data' => $category
-                ]
+                    'data' => new CategoryResource($category)
+                ],
+                Response::HTTP_CREATED
             );
         }
 
@@ -135,7 +138,7 @@ class CategoryController extends Controller
         return response()->json(
             [
                 'success' => true,
-                'data' => $category
+                'data' => new CategoryResource($category)
             ]
         );
     }
@@ -194,14 +197,13 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category): JsonResponse
     {
-
         $updated = $category->fill($request->all())->save();
 
         if ($updated) {
             return response()->json(
                 [
                     'success' => true,
-                    'data' => $category
+                    'data' => new CategoryResource($category)
                 ],
                 Response::HTTP_ACCEPTED
             );
@@ -254,7 +256,6 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category): JsonResponse
     {
-
         if ($category->delete()) {
             return response()->json(
                 [
