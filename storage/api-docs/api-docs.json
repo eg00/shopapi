@@ -529,6 +529,15 @@
                                 "readOnly": "true",
                                 "nullable": true
                             },
+                            "parent": {
+                                "description": "Class Category",
+                                "type": "object"
+                            },
+                            "children": {
+                                "description": "Class Category",
+                                "type": "array",
+                                "items": {}
+                            },
                             "created_at": {
                                 "$ref": "#/components/schemas/Model/properties/created_at"
                             },

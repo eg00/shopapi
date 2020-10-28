@@ -20,6 +20,8 @@ use Illuminate\Database\Query\Builder;
  * @OA\Property(property="description", type="string", description="", example=""),
  * @OA\Property(property="order", type="integer", description="Sort order in menu", example=1),
  * @OA\Property(property="parent_id", type="integer", nullable=true, description="Parent category id", default=null, readOnly="true"),
+ * @OA\Property(property="parent", type="object", @OA\Schema(ref="#/components/schemas/Category")),
+ * @OA\Property(property="children", type="array", @OA\Items(@OA\Schema(ref="#/components/schemas/Category"))),
  * @OA\Property(property="created_at", ref="#/components/schemas/Model/properties/created_at"),
  * @OA\Property(property="updated_at", ref="#/components/schemas/Model/properties/updated_at"),
  * @OA\Property(property="deleted_at", ref="#/components/schemas/Model/properties/deleted_at")
@@ -31,12 +33,14 @@ class Category extends Model
 
     protected $fillable = ['name', 'short_description', 'description', 'order'];
 
+    protected $with = ['parent', 'children'];
+
     public function parent()
     {
         return $this->belongsTo(self::class);
     }
 
-    public function childs()
+    public function children()
     {
         return $this->hasMany(Category::class, 'parent_id', 'id');
     }
