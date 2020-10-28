@@ -9,6 +9,7 @@ class Product extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
     protected $casts
         = [
             'variations' => 'array',
@@ -16,9 +17,11 @@ class Product extends Model
             'is_available' => 'boolean',
         ];
 
+    protected $with = ['category'];
+
     public function category()
     {
-        return $this->hasOne(Category::class);
+        return $this->belongsTo(Category::class);
     }
 
     public function scopeLatest($query)
