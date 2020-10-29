@@ -14,8 +14,9 @@ class ProductController extends Controller
     /**
      * @OA\Get(
      *      path="/admin/products",
+     *      path="/products",
      *      operationId="getProductsList",
-     *      tags={"Admin/Products"},
+     *      tags={"Admin/Products", "Products"},
      *      summary="Get list of products",
      *      description="Returns list of products",
      *      @OA\Response(
@@ -97,8 +98,9 @@ class ProductController extends Controller
     /**
      * @OA\Get(
      *      path="/admin/products/{id}",
+     *      path="/products/{id}",
      *      operationId="getProductsById",
-     *      tags={"Admin/Products"},
+     *      tags={"Admin/Products", "Products"},
      *      summary="Get product by id",
      *      description="Returns product data",
      *      @OA\Parameter(

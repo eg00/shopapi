@@ -19,8 +19,9 @@ class CategoryController extends Controller
      *
      * @OA\Get(
      *      path="/admin/categories",
+     *      path="/categories",
      *      operationId="getCategoriesList",
-     *      tags={"Admin/Categories"},
+     *      tags={"Admin/Categories", "Categories"},
      *      summary="Get list of categories",
      *      description="Returns list of categories",
      *      @OA\Response(
@@ -111,8 +112,9 @@ class CategoryController extends Controller
      *
      * @OA\Get(
      *      path="/admin/categories/{id}",
+     *      path="/categories/{id}",
      *      operationId="getCategoryById",
-     *      tags={"Admin/Categories"},
+     *      tags={"Admin/Categories", "Categories"},
      *      summary="Get category by id",
      *      description="Returns category data",
      *      @OA\Parameter(

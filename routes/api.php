@@ -23,3 +23,6 @@ Route::prefix('admin')->group(
     }
 );
 
+Route::apiResource('categories', CategoryController::class)->only(['index', 'show']);
+Route::apiResource('products', ProductController::class)->only(['index', 'show']);
+
