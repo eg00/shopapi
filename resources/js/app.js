@@ -30,3 +30,28 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     el: '#app',
 });
+
+require('slick-carousel');
+$(function () {
+    $('.product-slider .body').slick({
+        infinite: true,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        prevArrow: '.header__nav .fa-angle-left',
+        nextArrow: '.header__nav .fa-angle-right',
+    });
+    $('.new_goods__body').slick({
+        infinite: true,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        prevArrow: '.nav .fa-angle-left',
+        nextArrow: '.nav .fa-angle-right',
+    });
+});
+
+$('.footer__button a').on('click', function (event) {
+    event.preventDefault();
+    $('html,body').animate({
+        scrollTop: 0
+    }, 700);
+});

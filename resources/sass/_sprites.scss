@@ -1,0 +1,63 @@
+.sprite {
+  background-image: url(/images/spritesheet.png);
+  background-repeat: no-repeat;
+  display: inline-block;
+
+
+}
+
+.sprite-Arrow-up {
+  width: 15px;
+  height: 12px;
+  background-position: -5px -5px;
+}
+
+.sprite-arrow-left {
+  width: 13px;
+  height: 17px;
+  background-position: -30px -5px;
+}
+
+.sprite-arrow-right {
+  width: 13px;
+  height: 17px;
+  background-position: -53px -5px;
+}
+  .sprite-car {
+    width: 24px;
+    height: 12px;
+    background-position: -5px -32px;
+    margin: 10px 5px 12px;
+
+  }
+
+.sprite-cart {
+  width: 20px;
+  height: 20px;
+  background-position: -39px -32px;
+  margin-right: 10px;
+  margin-bottom: -5px;
+
+}
+
+.sprite-gift {
+  width: 13px;
+  height: 18px;
+  background-position: -76px -5px;
+  margin: 7px 11px 9px 11px;
+}
+
+.sprite-login {
+  width: 16px;
+  height: 16px;
+  background-position: -69px -33px;
+  margin-right: 5px;
+  margin-bottom: -2px;
+}
+
+.sprite-support {
+  width: 16px;
+  height: 16px;
+  background-position: -5px -59px;
+  margin: 8px 9px 10px;
+}

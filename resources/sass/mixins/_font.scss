@@ -1,0 +1,8 @@
+@mixin font($family: false, $size: false, $colour: false, $weight: false,  $lh: false) {
+  @if($family){ font-family: $family, ﻿AdobeInvisFont, sans-serif;}
+  @else   {font-family: Supermolot, ﻿AdobeInvisFont, sans-serif;}
+  @if $size { font-size: $size; }
+  @if $colour { color: $colour; }
+  @if $weight { font-weight: $weight; }
+  @if $lh { line-height: $lh; }
+}

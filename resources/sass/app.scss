@@ -1,8 +1,1436 @@
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
 
-// Variables
-@import 'variables';
+@import "variables";
+@import "fonts_frontend";
+@import "mixins/font";
+@import "sprites";
+@import "mixins/bem";
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: Supermolot, AdobeInvisFont, sans-serif;
+    background-color: #dee1e3;
+}
+
+.container {
+    max-width: 1170px;
+    padding-right: 0;
+    padding-left: 0;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.main_promo {
+    background: url("/images/header_bg.jpeg"), center center no-repeat;
+    background-size: cover;
+    height: 709px;
+}
+
+%triangle {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    border: 23px solid transparent;
+    background-color: transparent;
+
+    .text {
+        @include font(Supermolot-Bold, 9px, $white);
+        font-style: italic;
+        position: relative;
+
+        span {
+            position: absolute;
+            top: -16px;
+            left: -18px;
+            text-transform: uppercase;
+        }
+    }
+}
+
+.yellow {
+    @extend %triangle;
+    border-left: 23px solid #fff001;
+    border-top: 23px solid #fff001;
+}
+
+.cyan {
+    @extend %triangle;
+    border-left: 23px solid #17c7be;
+    border-top: 23px solid #17c7be;
+}
+
+.pink {
+    @extend %triangle;
+    border-left: 23px solid $red;
+    border-top: 23px solid $red;
+}
+
+.violet {
+    @extend %triangle;
+    border-left: 23px solid #8046f7;
+    border-top: 23px solid #8046f7;
+}
+
+header {
+    .header__menu {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding-top: 27px;
+
+        .logo {
+            background-color: $red;
+            padding: 30px 35px 32px 30px;
+        }
+
+        ul {
+            flex-grow: 1;
+            margin: 0;
+
+            padding-left: 0;
+            list-style: none;
+            background-color: $white;
+
+            li {
+                float: left;
+                background-color: $white;
+                line-height: 44px;
+
+                a {
+                    display: block;
+                    color: #000;
+                    padding: 8px 16px;
+                    text-decoration: none;
+
+                    &:hover, &.active {
+                        background-color: $blue;
+                        color: $white;
+                    }
+                }
+            }
+        }
+
+        .header__right {
+
+            display: flex;
+            flex-direction: column;
+            margin-left: auto;
+            min-width: 194px;
+            @include font(Supermolot-Light, 14px);
+
+            li {
+                float: right;
+            }
+
+            .login, .reg {
+                text-decoration: underline dashed;
+                padding: 8px 10px;
+            }
+
+            .login {
+                color: $pink;
+
+            }
+
+            .header__cart {
+                //height: 49px;
+                background: $blue-light url("/images/cart_icon.png") no-repeat right 10px center;
+                @include font(Supermolot-Bold, 20px, #ffffff, false, 10px);
+                padding-left: 15px;
+                padding-top: 12px;
+                padding-bottom: 12px;
+
+                .desc {
+                    @include font(Supermolot, 14px);
+
+                }
+
+                .cart__sub {
+                    display: block;
+                    font-size: 12px;
+                    color: #999999;
+                    line-height: 2;
+                }
+            }
+        }
+    }
+
+    .header__promo_wrapper {
+        max-width: 50%;
+
+        .header__promo {
+            //max-width: 600px;
+            line-height: 70px;
+            margin-top: 88px;
+
+            .header__promo_h1 {
+                @include font(Supermolot-Light, 70px);
+                font-style: italic;
+                text-transform: uppercase;
+            }
+
+            span {
+                font-family: Supermolot-Bold, AdobeInvisFont, sans-serif;
+            }
+
+            .header__promo_desc {
+                @include font(Supermolot, 16px, $white)
+            }
+        }
+
+        .header__promo_button {
+            font-size: 18px;
+            margin-top: 28px;
+            float: right;
+            padding: 20px 50px;
+            border: 3px solid $pink;
+            color: $white;
+
+            &:hover {
+                background-color: $pink;
+                transition: all .4s;
+            }
+        }
+    }
+}
+
+.new_goods {
+    margin-top: -74px;
+    margin-bottom: 18px;
+
+    &__header {
+        background-color: $white;
+        padding: 25px 31px;
+        @include font(Supermolot, 24px, #021562);
+
+        .nav {
+            float: right;
+        }
+    }
+
+    &__body {
+        display: flex;
+        flex-wrap: wrap;
+        //background-color: #f6f6f6;
+        background-color: $white;
+    }
+
+    .a:hover {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        z-index: 2;
+    }
+
+    .new_goods__card {
+        display: inline-block;
+        padding: 1px;
+        position: relative;
+        background-color: $white;
+        width: 288px;
+
+        img {
+            height: 232px;
+            max-width: 100%;
+            margin: auto;
+        }
+
+        .new_goods__card_text {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 28px 31px;
+
+            & .name {
+                color: rgba(85, 85, 85, 255);
+                font-size: 14px;
+            }
+
+            & .price {
+                @include font(Supermolot-Light, 18px, $red);
+                white-space: pre;
+                font-style: italic;
+            }
+        }
+    }
+}
+
+.promo {
+    display: flex;
+    justify-content: space-between;
+    height: 315px;
+    margin-bottom: 18px;
+
+    .promo_h1 {
+        display: flex;
+        flex-direction: column;
+        @include font(Supermolot-Bold, 32px);
+        font-style: italic;
+        text-transform: uppercase;
+        padding-bottom: 18px;
+        padding-left: 21px;
+
+        span {
+            font-family: Supermolot-Light, AdobeInvisFont, sans-serif;
+        }
+
+    }
+
+    .item_1, .item_2, .item_3 {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        width: 295px;
+    }
+
+    & > .item_1 {
+        background-image: url("/images/promo_1.jpeg");
+    }
+
+    & > .item_2 {
+        background-image: url("/images/promo_2.jpeg");
+        padding-right: 15px;
+
+        .promo_h1 {
+            text-align: right;
+        }
+    }
+
+    & > .item_3 {
+        background-image: url("/images/promo_3.jpeg");
+        color: $white;
+        padding-left: 31px;
+        width: 588px;
+    }
+}
+
+.popular_goods {
+    margin-bottom: 18px;
+
+    .new_goods__header {
+        background-color: $white;
+        padding: 25px 31px;
+        @include font(false, 24px, $blue-light);
+
+        .new_goods__header__nav {
+            float: right;
+        }
+
+    }
+
+    .new_goods__body {
+        display: flex;
+        flex-wrap: wrap;
+        background-color: $white;
+    }
+
+    .new_goods__card {
+        display: inline-block;
+        padding: 1px;
+        position: relative;
+        width: 288px;
+        width: 100%;
+        background-color: $white;
+
+        img {
+            margin: auto;
+            height: 232px;
+        }
+
+        .new_goods__card_text {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            background-color: $white;
+            padding: 28px 31px;
+            height: 100px;
+
+            & .name {
+                color: #555555;
+                font-size: 14px;
+            }
+
+            & .price {
+                position: relative;
+                white-space: nowrap;
+                @include font(Supermolot-Light, 18px, $red);
+                font-style: italic;
+
+                .oldprice {
+                    display: block;
+                    position: absolute;
+                    top: 18px;
+                    right: 0;
+                    @include font(Supermolot-Light-Italic, 16px, #999999);
+                    text-decoration: line-through;
+                }
+            }
+
+        }
+    }
+}
+
+.about {
+    background-image: url("/images/about.jpeg");
+    max-height: 315px;
+    margin-bottom: 18px;
+
+    .about_text {
+        max-width: 517px;
+        margin-left: 498px;
+        padding-top: 85px;
+        padding-bottom: 50px;
+
+        .about__header {
+            @include font(Supermolot-Bold, 24px, #01104c);
+            font-style: italic;
+        }
+
+        .about__body {
+            @include font(Supermolot-Light);
+            max-height: 180px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+    }
+}
+
+.login__header, .register__header, .category__header, .product__header, .cart__header, .checkout__header {
+    font-family: Supermolot-Light-Italic, AdobeInvisFont, sans-serif;
+    font-size: 75px;
+    text-transform: uppercase;
+    padding-top: 50px;
+    padding-bottom: 15px;
+}
+
+.product__back {
+    display: inline-block;
+    @include font(Supermolot-Light, 14px, $pink);
+    text-transform: uppercase;
+    padding-bottom: 18px;
+}
+
+.product {
+    display: flex;
+    //justify-content: space-between;
+    align-content: stretch;
+    background-color: $white;
+    margin-bottom: 24px;
+
+    &__images {
+        display: flex;
+        flex-direction: column;
+
+        &-full {
+
+            //height: 470px;
+            width: 380px;
+
+            img {
+                margin-top: 20px;
+                margin-left: 20px;
+                width: 100%;
+            }
+        }
+
+        &-thumbnails {
+            & .active {
+                outline: 2px solid #000000;
+            }
+
+            //переделать в flex
+            padding: 26px 70px;
+
+            //   img:not(:last-child){
+            img {
+                width: 56px;
+                height: 56px;
+                transition: all ease 0.4s;
+
+                &:hover {
+                    outline: 2px solid $gray;
+                    transform: scale(1.2);
+                }
+
+                display: inline-block;
+                margin-right: 19px;
+            }
+
+        }
+    }
+
+    &__center {
+        padding-top: 35px;
+        padding-left: 29px;
+
+        .header {
+            @include font(Supermolot-Light-Italic, 36px);
+
+            padding-bottom: 10px;
+            padding-right: 57px;
+            //margin-left: 29px;
+            border-bottom: 4px solid $pink;
+        }
+
+        .description {
+            @include font(Supermolot-Light, 14px, #555555);
+            padding-top: 17px;
+
+        }
+
+        select {
+            @include font(Supermolot-Light, 14px, #000000);
+            min-height: 32px;
+            display: inline-block;
+            padding: 10px 12px 8px;
+            width: 210px;
+            -webkit-appearance: menulist;
+            -moz-appearance: menulist;
+            appearance: menulist;
+            background-color: #e9e9e9;
+
+        }
+
+        .options {
+            @include font(Supermolot-Light, 14px, #333333);
+            padding-top: 31px;
+            white-space: nowrap;
+
+            select {
+                @include font(Supermolot-Light, 14px, #000000);
+                border: none;
+                min-height: 32px;
+                display: inline-block;
+                padding: 10px 12px 8px;
+                width: 210px;
+                -webkit-appearance: menulist;
+                -moz-appearance: menulist;
+                appearance: menulist;
+                background-color: #e9e9e9;
+
+            }
+        }
+
+    }
+
+    &__right {
+        padding-top: 39px;
+        padding-left: 35px;
+        margin-right: 49px;
+
+        .box {
+            min-width: 222px;
+            padding-top: 25px;
+            padding-bottom: 14px;
+            padding-left: 45px;
+            padding-right: 45px;
+            border: 1px solid #dbdbdb;
+            display: flex;
+            flex-flow: column wrap;
+            align-items: center;
+
+            .oldprice {
+                @include font(Supermolot-Light-Italic, 16px, #999999);
+                text-decoration: line-through;
+                margin-bottom: 11px;
+            }
+
+            .price {
+                @include font(Supermolot-Bold, 26px, $pink);
+                margin-bottom: 19px;
+                white-space: pre;
+            }
+
+            .status {
+                @include font(Supermolot-Light, 11px)
+            }
+
+            button {
+                background-color: $pink;
+                padding: 13px 14px 15px;
+                @include font(Supermolot-Bold, 15px, $white);
+                box-shadow: 0 0 4px #999;
+                transition: all .3s;
+
+                &:hover {
+                    background: #740733 radial-gradient(circle, transparent 1%, $pink 1%) center/15000%;
+                }
+
+                &:active {
+                    background-color: rgba(255, 22, 86, 0.44);
+                    background-size: 100%;
+                    transition: background 0s;
+                }
+            }
+        }
+
+        .second {
+            border-top: none;
+        }
+
+        .info {
+            margin-top: 25px;
+
+            .icon {
+                display: inline-block;
+                border: 4px solid #e9e9e9;
+                border-radius: 50%;
+                margin-right: 10px;
+                //line-height: normal;
+            }
+
+            .text {
+                line-height: 1.5;
+                display: inline-block;
+                @include font(Supermolot-Light, 14px, #999999);
+
+                strong {
+                    display: block;
+                }
+            }
+        }
+    }
+}
+
+.login__form, .register__form, .cabinet__form, .cart__form {
+    font-family: Supermolot-Light, AdobeInvisFont, sans-serif;
+    display: flex;
+    flex-grow: 1;
+    padding-bottom: 38px;
+
+    .login__form_login, .login__form_reg, .register__form_reg, .register__form_password {
+        margin: 1px;
+        width: 50%;
+        padding: 30px;
+
+        background-color: $white;
+
+        .header {
+            //font-family: Supermolot-Bold-Italic, AdobeInvisFont, sans-serif;
+            @include font(Supermolot-Bold-Italic, 24px);
+            padding-bottom: 7px;
+        }
+
+        .label {
+            color: $gray;
+            padding-top: 23px;
+            padding-bottom: 10px;
+        }
+
+        input {
+            font-family: inherit;
+            background-color: #e9e9e9;
+            border: none;
+            padding: 17px 18px 15px;
+            width: 100%;
+
+            &::placeholder {
+                @include font(Supermolot-Light, 16px, #000000)
+            }
+
+            &:focus {
+                outline: 2px solid $blue-light;
+            }
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 15px 20px;
+            font-family: Supermolot-Light, AdobeInvisFont, sans-serif;
+            font-size: 16px;
+            border: 4px solid $pink;
+
+            &[value="login"] {
+                background-color: white;
+                color: #333333;
+                margin-right: 32px;
+
+                &:hover {
+                    background-color: $pink;
+                    color: white;
+                }
+            }
+
+            &[value="reg"], &[value="edit"] {
+                background-color: $pink;
+                color: white;
+            }
+
+            &:hover {
+                background-color: white;
+                color: #333333;
+            }
+        }
+
+        a {
+            color: $pink;
+            font-size: 14px;
+            text-decoration: underline;
+        }
+    }
+
+    .register__form_reg, .register__form_password {
+        margin: 0;
+
+        input::placeholder {
+            color: black;
+        }
+    }
+
+    .cart_table {
+        background-color: $white;
+        width: 100%;
+
+        & > thead > tr > th {
+            @include font(Supermolot-Light, 14px, #999999, 300);
+
+            text-align: left;
+            padding-left: 31px;
+            padding-top: 35px;
+            padding-bottom: 29px;
+
+        }
+
+        .image {
+            line-height: 1px;
+            width: 172px;
+            height: 140px;
+
+            & > img {
+                margin: 0;
+                padding: 0;
+                height: 100%;
+            }
+        }
+
+        thead > tr, tbody > tr {
+            border-bottom: 1px solid #f6f6f6;
+        }
+
+        .title {
+            @include font(Supermolot-Light, 18px, #555555, 300);
+            padding-left: 30px;
+            //padding-top: 59px;
+            //padding-bottom: 60px;
+            span.var {
+                display: block;
+                color: $pink;
+                font-size: 14px;
+            }
+
+        }
+
+        .instock {
+            @include font(Supermolot-Light, 14px, $pink, 300);
+            //padding-left: 30px;
+        }
+
+        .price {
+            @include font(Supermolot-Light-Italic, 18px, #5d5d5d, 400);
+        }
+
+        .qty {
+            padding-top: 45px;
+            //padding-bottom: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .minus, .plus {
+
+                width: 41px;
+                height: 50px;
+                display: inline;
+                background-color: #e9e9e9;
+            }
+
+            .value {
+
+                display: inline;
+                text-align: center;
+                background-color: #e9e9e9;
+                height: 50px;
+                width: 54px;
+                font-size: 16px;
+                border: none;
+                border-left: 2px solid #dadada;
+                border-right: 2px solid #dadada;
+
+            }
+        }
+
+        .total {
+            @include font(Supermolot-Bold-Italic, 18px, #000000, 700);
+        }
+
+        .del {
+            font-size: 14px;
+            text-align: left;
+            padding-right: 29px;
+            color: #e9e9e9;
+
+            .fa-times {
+                color: #999999;
+            }
+
+        }
+
+        tfoot td {
+            a {
+                text-align: center;
+                padding-top: 16px;
+                @include font(﻿Supermolot-Light, 14px, #ffffff, 300);
+                display: inline-block;
+                width: 193px;
+                height: 46px;
+                background-color: #000000;
+            }
+
+            &:nth-child(2) {
+                text-align: right;
+            }
+
+            padding-right: 49px;
+            padding-left: 31px;
+            padding-bottom: 34px;
+            padding-top: 33px;
+
+            .caption {
+                @include font(Supermolot-Bold-Italic, 24px, #000000, 700);
+                padding-right: 34px;
+            }
+
+            .sum {
+                @include font(Supermolot-Bold-Italic, 30px, #000000, 700);
+            }
+
+            a.checkout {
+                height: 62px;
+                width: 295px;
+                margin-top: 27px;
+                padding: 15px 20px;
+                border: 4px solid $pink;
+                @include font(Supermolot-Bold, 20px, $white, 700);
+                background-color: $pink;
+                color: white;
+
+                &:hover {
+                    background-color: white;
+                    color: #333333;
+
+                }
+            }
+
+        }
+
+    }
+
+}
+
+.order {
+    padding-bottom: 40px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    //&>*{
+    //  width: 50%;
+    //}
+    input {
+        width: auto !important;
+    }
+
+    .num {
+        @include font(Supermolot-Light, 26px, false, false, 1.2)
+    }
+
+    .date {
+        @include font(Supermolot-Light, 12px, $gray, false, 1.2)
+    }
+
+    .sum {
+        line-height: 1.2;
+    }
+
+    .status {
+        @include font(Supermolot-Light, 36px, $pink)
+    }
+}
+
+//category
+
+.category__header {
+    font-family: Supermolot-Thin-Italic, AdobeInvisFont, sans-serif;
+}
+
+.category__counter {
+    @include font(Supermolot-Light, 14px, $gray);
+    text-transform: uppercase;
+    padding-bottom: 26px;
+}
+
+.category__paginator {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    background-color: $white;
+    padding: 25px 30px;
+
+    .text {
+        margin-right: 4px;
+    }
+
+    .page {
+        min-width: 30px;
+        display: inline-block;
+        padding: 10px;
+        margin: 0 4px;
+        background-color: #e9e9e9;
+        @include font(Supermolot-Bold, 14px, $white)
+    }
+
+    .active {
+        background-color: $pink;
+    }
+
+    &:last-child {
+        margin-bottom: 24px;
+    }
+}
+
+.category__items {
+    display: inline-flex;
+    flex-flow: row wrap;
+    flex-basis: content;
+    align-items: stretch;
+
+    .category__promo {
+        background-image: url("/images/category.jpeg");
+        width: 877px;
+        height: 328px;
+
+        .category__promo_header {
+            @include font(Supermolot-Italic, 38px);
+            padding: 84px 45px 14px;
+            text-transform: uppercase;
+        }
+
+        .category__promo_text {
+            margin-left: 45px;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+    }
+
+    .category__promo2 {
+        background-position: bottom right;
+        background-repeat: no-repeat;
+        background-image: url("/images/category_promo.png");
+        background-color: #f8f8f8;
+        width: 586px;
+        height: 650px;
+        //flex-basis: 25%;
+        //: 1;
+        //position: relative;
+        //bottom: 0;
+        //right: 0s;
+    }
+
+    .new_goods__card {
+        overflow: hidden;
+        display: inline-block;
+
+        margin: 2px;
+        margin-top: 1px;
+        position: relative;
+        width: 288px;
+        background-color: $white;
+
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            height: 232px;
+        }
+
+        .new_goods__card_text {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100px;
+            padding: 28px 31px;
+
+            & .name {
+                color: #555555;
+                font-size: 14px;
+            }
+
+            & .price {
+                @include font(Supermolot-Light, 18px, $red);
+                font-style: italic;
+                white-space: nowrap;
+
+            }
+        }
+    }
+}
+
+.checkout__form {
+
+    @include font(Supermolot-Light, 18px, #555555);
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    background-color: $white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+    margin-bottom: 19px;
+
+    padding-top: 34px;
+    padding-left: 30px;
+    padding-right: 701px;
+
+    .header {
+        @include font(Supermolot-Bold, 24px, $pink);
+
+        > .num {
+            color: #000000;
+        }
+    }
+
+    .section {
+        width: 100%;
+        @include font(Supermolot-Bold, 24px, #000000);
+
+        &.active {
+            background-color: #222429;
+
+            .text {
+                color: #ffffff;
+            }
+        }
+    }
+
+    p {
+        margin-top: 23px;
+    }
+
+    a {
+        width: 235px;
+        text-decoration: none;
+        background-color: $pink;
+        color: #ffffff;
+        padding: 20px 0 15px 27px;
+        margin-bottom: 99px;
+        margin-top: 25px;
+
+    }
+
+}
+
+.checkout1 {
+
+    @include font(Supermolot-Light, 18px, #555555);
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    background-color: $white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+    margin-bottom: 19px;
+    //>*{
+    // margin-top: 34px;
+    //  margin-left: 30px;
+    //}
+
+    .section {
+        padding: 31px 30px 29px 30px;
+        border-top: 2px solid #f6f6f6;
+        margin: 0;
+        width: 100%;
+        @include font(Supermolot-Bold, 24px, #000000);
+
+        &.active {
+            background-color: #222429;
+
+            .text {
+                color: #ffffff;
+            }
+
+        }
+
+        .num {
+            color: $pink;
+        }
+
+    }
+
+    &__form {
+        @include font(Supermolot-Light, 14px, $gray);
+        display: flex;
+        flex-direction: row;
+        padding-left: 29px;
+
+        .left {
+            width: 35%;
+            margin-right: 78px;
+        }
+
+        .header {
+            margin-top: 29px;
+            @include font(Supermolot-Bold, 18px, $pink);
+        }
+
+        input {
+            margin-top: 4px;
+            font-family: inherit;
+            background-color: #e9e9e9;
+            border: none;
+            padding: 17px 18px 15px;
+            width: 100%;
+
+            &::placeholder {
+                @include font(Supermolot-Light, 16px, #000000)
+            }
+
+            &:focus {
+                outline: 2px solid $blue-light;
+            }
+        }
+
+        .label {
+            margin-top: 18px;
+        }
+
+        button {
+            //width: 157px;
+            display: inline-block;
+            margin-top: 17px;
+            margin-bottom: 51px;
+            padding: 14px 23px 14px 26px;
+            border: 4px solid $pink;
+            @include font(Supermolot-Light, 18px, $white);
+            background-color: $pink;
+            color: white;
+
+            &:hover {
+                background-color: white;
+                color: #333333;
+
+            }
+        }
+
+        .right {
+            width: 35%;
+            margin-right: 78px;
+
+            a {
+                margin-left: 19px;
+                color: #343434;
+                text-decoration: underline;
+            }
+        }
+
+        .col {
+
+        }
+    }
+
+    p {
+        margin-top: 23px;
+    }
+
+    table {
+
+        .title {
+            width: 50%;
+            text-align: left;
+
+        }
+
+        td {
+            padding-top: 14px;
+            padding-bottom: 14px;
+            padding-left: 33px;
+
+            &.qty_fixed {
+                padding-left: 63px;
+                font-style: italic;
+            }
+
+            &.total {
+                padding-left: 0;
+            }
+        }
+
+        .sum {
+            padding-right: 23px;
+        }
+
+    }
+
+    .delivery_total {
+        color: #0d0b0b;
+        display: flex;
+        flex-direction: column;
+        padding-left: 29px;
+        padding-bottom: 27px;
+
+        .row {
+            justify-content: left;
+        }
+
+        .col1, .col2, .col3 {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .col1 {
+            margin-right: 100px;
+        }
+
+        .col2 {
+            margin-right: 188px;
+        }
+
+        .col3 {
+            width: 220px;
+        }
+
+        .header {
+            margin-bottom: 15px;
+            @include font(Supermolot-Bold, 18px, $pink);
+        }
+
+        .label {
+            @include font(Supermolot-Light, 14px, $gray);
+            padding-bottom: 6px;
+        }
+
+        .value {
+            padding-bottom: 30px;
+        }
+
+        .space {
+            justify-content: space-between;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 15px 20px;
+            font-family: Supermolot-Light, AdobeInvisFont, sans-serif;
+            font-size: 22px;
+            border: 4px solid $pink;
+
+            &[value="login"] {
+                background-color: white;
+                color: #333333;
+                margin-right: 32px;
+
+                &:hover {
+                    background-color: $pink;
+                    color: white;
+                }
+            }
+
+            background-color: $pink;
+            color: white;
+
+            &:hover {
+                background-color: white;
+                color: #333333;
+            }
+        }
+
+    }
+
+    .delivery_form {
+        @include font(Supermolot-Light, 14px, $gray);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding-left: 29px;
+        padding-bottom: 40px;
+
+        .col1 {
+            margin-right: 53px;
+
+            input {
+                width: 394px;
+            }
+
+            .row {
+                padding-bottom: 37px;
+
+                input {
+                    width: 181px !important;
+                }
+            }
+        }
+
+        .col2 {
+            margin-right: 56px;
+
+            .header {
+                padding-bottom: 45px;
+            }
+        }
+
+        .col3 {
+            margin-right: 26px;
+        }
+
+        .header {
+            margin-top: 29px;
+            @include font(Supermolot-Bold, 18px, $pink);
+        }
+
+        .label {
+            color: $gray;
+            padding-top: 23px;
+            padding-bottom: 10px;
+        }
+
+        input {
+            font-family: inherit;
+            background-color: #e9e9e9;
+            border: none;
+            padding: 17px 18px 15px;
+            width: 100%;
+
+            &::placeholder {
+                @include font(Supermolot-Light, 16px, #000000)
+            }
+
+            &:focus {
+                outline: 2px solid $blue-light;
+            }
+
+        }
+
+        .delivery_option {
+
+            input {
+                position: absolute;
+                z-index: -1;
+                opacity: 0;
+                margin: 10px 0 0 7px;
+
+                &:checked + span:after {
+                    opacity: 1;
+                }
+
+                &:checked + span:before {
+                    background-color: #17c7be !important;
+                }
+
+            }
+
+            span {
+                display: block;
+                @include font(Supermolot-Light, 16px, #000000);
+                position: relative;
+                padding: 0 0 0 33px;
+                margin-bottom: 22px;
+                cursor: pointer;
+
+                &:before {
+                    content: '';
+                    position: absolute;
+                    //top: -3px;
+                    left: 0;
+                    width: 18px;
+                    height: 18px;
+                    //border: 1px solid #CDD1DA;
+                    border-radius: 50%;
+                    background-color: #cbcbcb;
+                }
+
+                &:after {
+                    content: '';
+                    position: absolute;
+                    top: 3px;
+                    left: 3px;
+                    width: 12px;
+                    height: 12px;
+                    border-radius: 50%;
+                    background-color: #ffffff;
+                    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .5);
+                    opacity: 0;
+                    transition: .2s;
+                }
+
+            }
+
+        }
+
+        textarea {
+            width: 374px;
+            height: 216px;
+            background-color: #e9e9e9;
+            border: none;
+            @include font(Supermolot, 15px, #000000);
+            padding: 17px 16px;
+
+            &::placeholder {
+                @include font(Supermolot, 15px, #000000);
+            }
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 15px 20px;
+            font-family: Supermolot-Light, AdobeInvisFont, sans-serif;
+            font-size: 16px;
+            border: 4px solid $pink;
+
+            &[value="login"] {
+                background-color: white;
+                color: #333333;
+                margin-right: 32px;
+
+                &:hover {
+                    background-color: $pink;
+                    color: white;
+                }
+            }
+
+            background-color: $pink;
+            color: white;
+
+            &:hover {
+                background-color: white;
+                color: #333333;
+            }
+        }
+
+        a {
+            color: $pink;
+            font-size: 14px;
+            text-decoration: underline;
+        }
+    }
+
+}
+
+footer {
+    width: 100%;
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $blue;
+
+    & .footer__text {
+        @include font(false, 11px, #797b85);
+        padding: 10px 20px;
+    }
+
+    .footer__button {
+        @include font(false, 16px, #ffffff);
+        padding: 20px 50px;
+    }
+}
+
+//@import "components/sliders";
