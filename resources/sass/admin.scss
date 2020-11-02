@@ -1,0 +1,11 @@
+@import "mixins/font";
+body {
+    background-color: #297FB8;
+    @include font(ProximaNova, 14px);
+
+}
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;

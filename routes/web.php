@@ -21,3 +21,5 @@ Route::get('/product/{product}', function () {})->name('product');
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::view('admin/{any?}', 'admin.index')->where('any', '.*');
