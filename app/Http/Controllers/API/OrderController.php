@@ -10,6 +10,25 @@ use Illuminate\Http\Response;
 
 class OrderController extends Controller
 {
+
+    /**
+     * @OA\Get(
+     *      path="/admin/orders",
+     *      operationId="getOrdersList",
+     *      tags={"Admin/Orders"},
+     *      summary="Get list of orders",
+     *      description="Returns list of orders",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="success", type="boolean"),
+     *              @OA\Property(property="data", type="array", @OA\Items(ref="#/components/schemas/Order")),
+     *          )
+     *       )
+     *     )
+     */
+
     /**
      * Display a listing of the resource.
      *
